@@ -1,4 +1,4 @@
-# Sites com acesso permitido apenas durante o horário de aula
+# Sites com acesso permitido apenas fora do horário de aula
 .ead.sp.senai.br
 .livre.sp.senai.br
 .ava1.sp.senai.br

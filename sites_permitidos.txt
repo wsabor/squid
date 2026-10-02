@@ -47,6 +47,7 @@ forms.gle
 # ---------------------------------------------------
 .canva.com
 .removebg.com
+.remove.bg
 
 # ---------------------------------------------------
 # Streaming de Audio (Spotify)
@@ -57,6 +58,7 @@ forms.gle
 .spotify.com
 .scdn.co
 .spotifycdn.com
+.spotifycdn.net
 .pscdn.co
 
 # ---------------------------------------------------
@@ -116,7 +118,7 @@ docs.aws.amazon.com
 .wokwi.com
 .miro.com
 .draw.io
-.app.diagrams.net
+.diagrams.net
 
 # ---------------------------------------------------
 # Sites para atividades de desenvolvimento
@@ -165,6 +167,7 @@ docs.aws.amazon.com
 .pythonhosted.org
 .packagist.org
 .nuget.org
+.nodejs.org
 
 # --- Containers e imagens base ---
 .docker.com
@@ -184,3 +187,5 @@ docs.aws.amazon.com
 # --- Windows Update / listas de certificados (CTL) ---
 # Bloqueado, o Windows trava em validacao de certificado e entra em retry.
 .windowsupdate.com
+.msftconnecttest.com
+.msftncsi.com
