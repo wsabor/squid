@@ -1,0 +1,9 @@
+# Estado de execucao: reescrito pelo proxy-modo.sh a cada troca de modo.
+# Versionar faria quem clona receber a liberacao que estava ativa no
+# momento do commit. O estado inicial esta em modo.conf.exemplo.
+modo.conf
+
+# Backups locais
+*.bak
+squid-backup-*/
+modo.conf

@@ -29,6 +29,7 @@
 .googleusercontent.com
 .ggpht.com
 forms.gle
+classroom.siteswiki.org
 
 # ---------------------------------------------------
 # Conteudo e Midia (YouTube para Educacao)
