@@ -1,0 +1,11 @@
+# Estado inicial: MODO RESTRITO (whitelist em vigor, IA e redes sociais bloqueadas)
+# Copie para /etc/squid/modo.conf na instalacao.
+# Depois disso o arquivo e reescrito pelo proxy-modo.sh - NAO EDITAR A MAO.
+# MODO: restrito
+# ALVO: sala inteira
+
+acl alvo src 10.137.144.0/24
+
+# Quem nao e alvo mantem o bloqueio padrao das duas categorias.
+http_access deny localnet redes_sociais
+http_access deny localnet sites_ia
