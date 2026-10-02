@@ -1,0 +1,81 @@
+# ===================================================
+# ==   LISTA DE SITES DE INTELIGENCIA ARTIFICIAL   ==
+# ==   Revisao: 21/08/2026 (r3)                    ==
+# ===================================================
+# FONTE UNICA dos dominios de IA. Nenhum destes deve aparecer em
+# sites_permitidos.txt - se aparecer, cria duas fontes de verdade.
+#
+# Esta lista e avaliada pelo include /etc/squid/modo.conf, que fica ANTES
+# das demais negacoes e da whitelist. Quem escreve o modo.conf e o script
+# /root/proxy-modo.sh:
+#
+#   proxy-modo.sh restrito              -> deny  (padrao de aula)
+#   proxy-modo.sh ia                    -> allow para a sala inteira
+#   proxy-modo.sh ia 10.137.144.215     -> allow so para um notebook
+#
+# Como o allow do modo.conf tem precedencia sobre a whitelist, e ele que
+# efetivamente bloqueia copilot.github.com e copilot.microsoft.com apesar
+# de .github.com e .microsoft.com estarem liberados.
+#
+# MUDANCAS r3 (21/08/2026):
+#  + generativelanguage.googleapis.com  (veio de sites_contorno.txt)
+#    Motivo: e API de IA e deve seguir o toggle. Antes, o modo liberado
+#    soltava o Gemini web mas mantinha a API negada em separado.
+#  - .sydney.bing.com  (REMOVIDO - era codigo morto)
+#    Motivo: .bing.com consta em sites_ruido.txt, negado na regra 3, que
+#    roda antes deste arquivo. A entrada nunca era alcancada.
+#    Consequencia: o Copilot do Edge NAO volta a funcionar nem em modo "ia".
+#    Se quiser que volte, remova .bing.com de sites_ruido.txt.
+#
+# ANOTACAO ANTERIOR (mantida): ".bing.com/chat" foi removido porque ACLs
+# dstdomain aceitam APENAS dominios, nunca caminhos.
+
+# --- IAs do Google ---
+.gemini.google.com
+.aistudio.google.com
+generativelanguage.googleapis.com
+
+# --- Plataformas de Chat e Geracao de Texto ---
+.chatgpt.com
+.openai.com
+.meta.ai
+.poe.com
+.perplexity.ai
+.pi.ai
+.claude.ai
+.anthropic.com
+.grok.com
+.x.ai
+.mistral.ai
+.character.ai
+
+# --- Ferramentas de Codigo e Desenvolvimento ---
+.blackbox.ai
+.useblackbox.io
+.phind.com
+.deepseek.com
+.copilot.microsoft.com
+.copilot.github.com
+.githubcopilot.com
+.cursor.com
+.codeium.com
+.tabnine.com
+.v0.dev
+.lovable.dev
+.bolt.new
+.replit.com
+
+# --- Outras Ferramentas de IA (Imagens, Apresentacoes, etc.) ---
+.gamma.app
+.midjourney.com
+.leonardo.ai
+.deepai.org
+.talkai.info
+.contexto.me
+.myshell.ai
+.suno.com
+.elevenlabs.io
+.runwayml.com
+.stability.ai
+.civitai.com
+.quillbot.com

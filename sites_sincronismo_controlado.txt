@@ -1,0 +1,19 @@
+# ===================================================
+# == ENDPOINTS DE SINCRONISMO (HORARIO CONTROLADO) ==
+# == Revisao: 20/08/2026                           ==
+# ===================================================
+# Apenas endpoints de TRANSFERENCIA de arquivos.
+#
+# NAO adicione aqui: .microsoft.com, .microsoftonline.com, .live.com,
+# .windows.net, .office.com
+#
+# Motivo: a regra 3b do squid.conf NEGA esta lista fora da janela. Esses
+# dominios sao usados para AUTENTICACAO e para Azure/Teams - inclui-los
+# derrubaria o login Microsoft em toda a escola fora do horario de
+# sincronismo. Eles ja estao liberados integralmente em sites_permitidos.txt.
+
+.onedrive.com
+.sharepoint.com
+storage.live.com
+.files.1drv.com
+oneclient.sfx.ms

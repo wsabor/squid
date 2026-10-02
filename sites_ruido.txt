@@ -1,0 +1,47 @@
+# ===================================================
+# ==   RUIDO - CLIENTES AUTOMATICOS EM RETRY       ==
+# ==   Revisao: 21/08/2026 (r3)                    ==
+# ===================================================
+# Negados no INICIO da cadeia de regras (regra 3 do squid.conf), logo apos o
+# corte de origem.
+#
+# MOTIVO: em 20/08/2026 o access.log tinha 136.004 TCP_DENIED, dos quais
+# ~111.000 eram apenas tres destinos abaixo. Nao sao alunos navegando: sao
+# clientes automaticos que reconectam em loop ao receber 403. Como nenhum
+# deles casava com lista de deny alguma, percorriam TODA a cadeia de regras
+# ate o "deny all" final - dezenas de milhares de vezes.
+#
+# Nada aqui muda a politica: todos ja eram bloqueados pelo default-deny.
+# A lista apenas os barra mais cedo, economizando processamento.
+#
+# ============================================================
+# ATENCAO - ESTA LISTA VENCE O TOGGLE
+# ============================================================
+# A regra 3 roda ANTES do include modo.conf. Logo, o que estiver aqui
+# permanece bloqueado mesmo em modo "ia" e mesmo em modo "livre".
+#
+# Caso concreto: .bing.com esta nesta lista. O backend do Copilot do Edge
+# e sydney.bing.com. Consequencia: o Copilot NAO funciona nem quando a IA
+# esta liberada pelo toggle. Se em algum momento voce quiser o Copilot
+# disponivel nas atividades dirigidas, comente a linha .bing.com abaixo -
+# ao custo de reintroduzir o retry de telemetria do Edge no log.
+#
+# MUDANCAS r3 (21/08/2026):
+#  - REMOVIDO "microsoft.microsoftofficehub": nao e um nome de dominio
+#    valido, entao a ACL dstdomain nunca casava com ele. Gerava apenas
+#    ruido no "squid -k parse". Era um nome de pacote UWP, nao um host.
+#  - Removido cabecalho de secao vazio ("Extensao Copilot no VS Code"),
+#    que nao tinha nenhuma entrada abaixo.
+
+# --- Telemetria do Windows ---
+activity.windows.com
+mobile.events.data.microsoft.com
+cp801.prod.do.dsp.mp.microsoft.com
+
+# --- Edge / Bing ---
+# Ver a nota acima sobre o Copilot antes de mexer nesta linha.
+.bing.com
+
+# --- Telemetria Google/Chrome ---
+beacons.gvt2.com
+beacons.gcp.gvt2.com

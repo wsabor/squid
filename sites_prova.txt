@@ -1,0 +1,55 @@
+# ===================================================
+# ==   DOMINIOS LIBERADOS DURANTE PROVAS           ==
+# ==   Revisao: 28/08/2026 (arquivo novo)          ==
+# ===================================================
+# Usado APENAS pela base "bloqueado" com a flag +prova:
+#
+#   proxy-modo.sh bloqueado           -> nada passa
+#   proxy-modo.sh bloqueado +prova    -> so o que esta nesta lista
+#
+# REGRA DE OURO: mantenha esta lista MINIMA. Todo dominio aqui e uma
+# porta aberta durante a avaliacao. Nao inclua .google.com, .senai.br
+# nem nada amplo - eles arrastam pesquisa, Drive, tradutor e e-mail.
+#
+# Antes de aplicar numa prova, teste com um notebook:
+#   proxy-modo.sh bloqueado +prova 10.137.144.209
+# e confirme que a plataforma abre e carrega por completo. Muitas
+# plataformas puxam CSS, JS ou fontes de outro dominio - se faltar algum,
+# a pagina abre quebrada e a prova trava no meio.
+
+# --- AVA / EAD SENAI ---
+# COMENTADAS DE PROPOSITO - nao funcionam em horario de aula.
+#
+# A regra 3c do squid.conf nega ead/ava/livre durante a aula (07:00-11:00 e
+# 12:00-16:00) e roda ANTES do modo.conf. Logo, a flag +prova nao consegue
+# liberar estes dominios nesse periodo - o bloqueio de horario vence.
+#
+# Isso e intencional: a politica e que essas plataformas nao sejam
+# acessadas em horario de aula em nenhuma circunstancia.
+#
+# Descomente apenas se a politica mudar. Se precisar de uma prova no AVA
+# dentro do horario de aula, o caminho e ajustar a regra 3c, nao esta lista.
+#ead.sp.senai.br
+#ava1.sp.senai.br
+#livre.sp.senai.br
+
+# --- Sistema proprio de simulado ---
+# O sistema em http://10.187.226.125:8104/ NAO entra nesta lista: por ser
+# endereco IP, e tratado pelas ACLs "sistema_prova" e "porta_prova" no
+# squid.conf, que o script libera junto com esta lista na flag +prova.
+# (dstdomain nao casa endereco IP literal.)
+#
+# Se um dia o sistema ganhar um nome DNS, acrescente o nome aqui.
+
+# --- Assets que as plataformas acima costumam exigir ---
+# Comece comentado. Se a pagina abrir quebrada, descomente o que faltar,
+# identificando pelo access.log:
+#   tail -f /var/log/squid/access.log | grep TCP_DENIED | grep 10.137.144.
+#.gstatic.com
+#.cloudflare.com
+#.jsdelivr.net
+
+# --- Compiladores e sandboxes online ---
+# Somente se a avaliacao exigir execucao de codigo no navegador.
+#.replit.com
+#.codepen.io

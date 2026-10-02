@@ -1,0 +1,37 @@
+# ===================================================
+# == SERVICOS DE CONTORNO SOB DOMINIOS DA WHITELIST ==
+# == Revisao: 21/08/2026 (r3)                      ==
+# ===================================================
+# Estes dominios sao filhos de entradas presentes em sites_permitidos.txt
+# (.google.com, .googleapis.com, .live.com). Sem um deny explicito ANTES
+# do "allow localnet allowed_sites", ficam liberados por heranca.
+#
+# ATENCAO: esta lista e avaliada DEPOIS do include modo.conf. Portanto o
+# modo "livre" do proxy-modo.sh sobrepoe estes denies. E intencional -
+# "livre" significa sem filtro. O modo "ia" nao afeta esta lista.
+#
+# MUDANCA r3: generativelanguage.googleapis.com MOVIDO para sites_ia.txt.
+# Motivo: e API de IA e deve seguir o toggle junto com o resto. Ficando
+# aqui, o modo "ia" liberava o Gemini web mas mantinha a API bloqueada.
+
+# --- Tradutores usados como proxy de contorno ---
+# translate.google.com renderiza qualquer site dentro do dominio do Google.
+# E o metodo de bypass mais comum em ambiente escolar.
+translate.google.com
+translate.googleusercontent.com
+
+# --- Cache que serve conteudo de terceiros ---
+webcache.googleusercontent.com
+
+# --- E-mail pessoal ---
+# outlook.live.com e liberado por heranca de .live.com (necessario p/ OneDrive)
+outlook.live.com
+# Descomente para bloquear tambem o Gmail pessoal:
+#mail.google.com
+
+# --- Videoconferencia fora do escopo pedagogico ---
+# Estava ativo em sites_bloqueados.txt, mas era liberado por .google.com
+meet.google.com
+
+# --- Google Chat: conversas paralelas durante a aula ---
+chat.google.com

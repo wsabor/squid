@@ -1,0 +1,186 @@
+# ===================================================
+# == LISTA DE SITES PERMITIDOS - AMBIENTE ESCOLAR  ==
+# == Revisao: 21/08/2026 (r3)                      ==
+# ===================================================
+# Dominios amplos (.google.com, .microsoft.com, .live.com) foram MANTIDOS
+# para nao quebrar autenticacao. Os subdominios problematicos que eles
+# arrastam junto sao tratados por deny explicito em sites_contorno.txt,
+# que e avaliado ANTES desta lista.
+#
+# MUDANCA r3 (21/08/2026):
+# REMOVIDO o bloco de dominios de IA que havia sido colado no final deste
+# arquivo em 20/08/2026 (de .chatgpt.com ate .sydney.bing.com).
+#
+# Motivo: os dominios de IA agora tem fonte unica em sites_ia.txt e sao
+# controlados pelo toggle (proxy-modo.sh). No modo "ia" o allow explicito
+# libera sem precisar da whitelist; no modo "restrito" o deny bloqueia.
+# Mante-los aqui criava duas fontes de verdade para a mesma decisao.
+#
+# REGRA PRATICA: nenhum dominio de IA deve constar neste arquivo.
+
+# ---------------------------------------------------
+# Essenciais do Google (Login, Pesquisa, APIs, Workspace)
+# Cobre accounts, classroom, drive, docs, forms, calendar, cloud, etc.
+# ---------------------------------------------------
+.google.com
+.google.com.br
+.googleapis.com
+.gstatic.com
+.googleusercontent.com
+.ggpht.com
+forms.gle
+
+# ---------------------------------------------------
+# Conteudo e Midia (YouTube para Educacao)
+# Descomente se necessario para videos no Classroom.
+# ---------------------------------------------------
+#.youtube.com
+#.youtube.com.br
+#.youtu.be
+#.ytimg.com
+#.googlevideo.com
+
+# ---------------------------------------------------
+# Ferramentas Graficas
+# NOTA: o Canva embute recursos de IA generativa. Se a politica de bloqueio
+# de IA precisar ser estrita, avalie mover para sites_ia.txt.
+# ---------------------------------------------------
+.canva.com
+.removebg.com
+
+# ---------------------------------------------------
+# Streaming de Audio (Spotify)
+# NOTA: estes dominios tambem constam na bypass list do proxy nos notebooks
+# (Fix-Veyon V9). Na pratica o trafego do Spotify sai direto, sem passar
+# aqui - as entradas ficam como rede de seguranca caso o bypass falhe.
+# ---------------------------------------------------
+.spotify.com
+.scdn.co
+.spotifycdn.com
+.pscdn.co
+
+# ---------------------------------------------------
+# Design e Prototipagem (Figma)
+# ---------------------------------------------------
+.figma.com
+.figmacdn.com
+
+# ---------------------------------------------------
+# Plataformas de Nuvem para Atividades Pedagogicas
+# ---------------------------------------------------
+
+# --- Amazon Web Services (AWS) ---
+# ALTERADO: ".amazon.com" foi trocado pelos subdominios do console, para
+# nao liberar a loja da Amazon junto. Se algum recurso da AWS deixar de
+# carregar, descomente a linha ampla abaixo como teste.
+#.amazon.com
+aws.amazon.com
+console.aws.amazon.com
+docs.aws.amazon.com
+.amazonaws.com
+.awsstatic.com
+
+# --- Microsoft Azure Platform ---
+# .windows.net e amplo (cobre todo o Azure Blob Storage), mas restringi-lo
+# quebra servicos de forma imprevisivel. Mantido por decisao de estabilidade.
+.azure.com
+.microsoft.com
+.windows.net
+.microsoftonline.com
+.live.com
+.visualstudio.com
+
+# ---------------------------------------------------
+# SENAI e parceiros
+# ---------------------------------------------------
+.conectasenai.com.br
+.senai.br
+.sesisp.org.br
+
+# ---------------------------------------------------
+# Seguranca / Antivirus (Trend Micro)
+# ---------------------------------------------------
+.trendmicro.com
+.trendmicro-cloud.com
+
+# ---------------------------------------------------
+# Ferramentas de Desenvolvimento
+# ---------------------------------------------------
+.jetbrains.com
+.vercel.com
+.vercel.app
+.netlify.app
+.github.com
+#.render.com
+.niloweb.com.br
+.wokwi.com
+.miro.com
+.draw.io
+.app.diagrams.net
+
+# ---------------------------------------------------
+# Sites para atividades de desenvolvimento
+# ---------------------------------------------------
+.tinkercad.com
+.arduino.cc
+.arduino.org
+.mentimeter.com
+.autodesk.com
+
+# ===================================================
+# == SUPORTE A DESENVOLVIMENTO (adicionado 20/08)   ==
+# ===================================================
+# Sem estes, varias paginas ja liberadas renderizam quebradas de forma
+# nao obvia (imagens, CSS e JS servidos por dominio diferente do principal).
+
+# --- GitHub: assets, avatares, raw e Pages ---
+.githubusercontent.com
+.githubassets.com
+.github.io
+# NAO adicionar .githubcopilot.com aqui - pertence a sites_ia.txt.
+# (Em 20/08 ele foi colado neste arquivo por engano; removido em 21/08.)
+
+# --- Documentacao e referencia ---
+.stackoverflow.com
+.stackexchange.com
+.sstatic.net
+.mozilla.org
+.w3.org
+.w3schools.com
+.devdocs.io
+
+# --- CDNs de bibliotecas front-end ---
+.jsdelivr.net
+.cdnjs.cloudflare.com
+.unpkg.com
+.bootstrapcdn.com
+.fontawesome.com
+.jquery.com
+
+# --- Gerenciadores de pacote ---
+.npmjs.com
+.npmjs.org
+.yarnpkg.com
+.pypi.org
+.pythonhosted.org
+.packagist.org
+.nuget.org
+
+# --- Containers e imagens base ---
+.docker.com
+.docker.io
+
+# --- VS Code (marketplace e updates) ---
+# NOTA: se a intencao de bloquear extensoes voltar a valer, remova esta linha.
+.vscode-cdn.net
+
+# --- Bancos de dados e backend usados em aula ---
+.mongodb.com
+.supabase.com
+.supabase.co
+.postgresql.org
+.mysql.com
+
+# --- Windows Update / listas de certificados (CTL) ---
+# Bloqueado, o Windows trava em validacao de certificado e entra em retry.
+.windowsupdate.com

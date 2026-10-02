@@ -1,0 +1,49 @@
+# ===================================================
+# ==   PADROES DE URL PARA JOGOS (url_regex -i)    ==
+# ==   Revisao: 20/08/2026                         ==
+# ===================================================
+#
+# LIMITACAO IMPORTANTE - LEIA ANTES DE CONFIAR NESTE ARQUIVO:
+# Em requisicoes HTTPS o Squid so enxerga "host:443" no metodo CONNECT.
+# A URL completa viaja dentro do TLS. Portanto TODOS os padroes de path
+# abaixo (/search?q=, /doodles/, /fbx?fbx=) so funcionam em HTTP puro,
+# que hoje e residual. Na pratica esta lista bloqueia muito pouco.
+#
+# O controle real de busca precisa ser feito por DNS, no resolvedor interno:
+#   www.google.com   CNAME  forcesafesearch.google.com
+#   www.youtube.com  CNAME  restrictmoderate.youtube.com
+#
+# CORRECOES APLICADAS NESTA VERSAO:
+#  - "jogo da velha" era quebrado por espaco em 3 regex independentes:
+#    "jogo", "da" e "velha". O termo "da" casava com quase qualquer URL,
+#    gerando falsos positivos em massa. Agora usa "." como coringa.
+#  - "campo minado" tinha o mesmo problema.
+#  - "/fbx?fbx=" tornava o "x" opcional (? = quantificador em regex).
+#    O "?" foi escapado.
+#  - Comentarios inline movidos para linhas proprias, por seguranca de parsing.
+
+# --- Nomes de jogos especificos ---
+pacman
+snake
+solitaire
+paciencia
+tic-tac-toe
+jogo.da.velha
+minesweeper
+campo.minado
+google-feud
+quick-draw
+
+# --- Padroes de URL de doodles e jogos do Google ---
+# Padrao comum dos jogos interativos no resultado da busca
+/fbx\?fbx=
+# Muitos jogos sao "Doodles" interativos
+/doodles/
+# Pesquisas contendo palavras-chave de jogos
+/search\?q=.*jogos.*
+/search\?q=.*games.*
+/search\?q=.*joguinhos.*
+
+# --- Termos genericos ---
+play-games
+online-games
